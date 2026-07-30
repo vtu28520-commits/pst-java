@@ -1,0 +1,25 @@
+public class MaxElementFinder {
+    public static int findMax(int[] arr, int n) {
+        
+        if (arr == null || n == 0) {
+            throw new IllegalArgumentException("Array cannot be empty");
+        }
+
+        int max = arr[0]; 
+
+        
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > max) {
+                max = arr[i]; 
+            }
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {12, 45, 2, 98, 33, 27};
+        int n = arr.length;
+        
+        System.out.println("Maximum element: " + findMax(arr, n)); // Output: 98
+    }
+}
