@@ -1,0 +1,41 @@
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class KthSmallestFinder {
+    
+    public static int findKthSmallest(int[] arr, int k) {
+        
+        if (arr == null || arr.length == 0 || k > arr.length || k <= 0) {
+            throw new IllegalArgumentException("Invalid input array or k value.");
+        }
+
+        
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        
+        for (int num : arr) {
+            maxHeap.add(num);
+
+            
+            if (maxHeap.size() > k) {
+                maxHeap.poll();
+            }
+        }
+
+        
+        return maxHeap.peek();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {7, 10, 4, 3, 20, 15};
+        int k = 3;
+
+        try {
+            int result = findKthSmallest(arr, k);
+            System.out.println("The " + k + "th smallest element is: " + result);
+            
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
