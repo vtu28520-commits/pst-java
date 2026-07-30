@@ -1,0 +1,11 @@
+public class Main {
+    public static void main(String[] args) {
+        
+        String[] fruits = {"Apple", "Banana", "Cherry", "Mango"};
+        
+        int targetIndex = 2;
+
+        String element = fruits[targetIndex];
+        System.out.println("Element at index " + targetIndex + " is: " + element);
+    }
+}
