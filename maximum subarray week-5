@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static int[] maxSubarray(int[] arr) {
+        int maxSubarray = arr[0];
+        int currentSum = arr[0];
+
+        // Maximum subsequence sum
+        int maxSubsequence = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+
+            // Kadane's algorithm for maximum subarray
+            currentSum = Math.max(arr[i], currentSum + arr[i]);
+            maxSubarray = Math.max(maxSubarray, currentSum);
+
+            // Maximum non-empty subsequence
+            if (arr[i] > 0) {
+                maxSubsequence += arr[i];
+            }
+        }
+
+        // If all elements are negative, choose the largest element
+        boolean hasPositive = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                hasPositive = true;
+                break;
+            }
+        }
+
+        if (!hasPositive) {
+            maxSubsequence = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                maxSubsequence = Math.max(maxSubsequence, arr[i]);
+            }
+        }
+
+        return new int[] { maxSubarray, maxSubsequence };
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int t = Integer.parseInt(br.readLine().trim());
+
+        while (t-- > 0) {
+            int n = Integer.parseInt(br.readLine().trim());
+
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int[] arr = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+
+            int[] result = maxSubarray(arr);
+
+            System.out.println(result[0] + " " + result[1]);
+        }
+    }
+}
